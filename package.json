@@ -1,0 +1,9 @@
+{
+    "type": "module",
+    "devDependencies": {
+        "hereby": "^1.10.0"
+    },
+    "dependencies": {
+        "fund": "^1.0.0"
+    }
+}
