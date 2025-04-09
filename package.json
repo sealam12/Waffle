@@ -1,9 +1,30 @@
 {
-    "type": "module",
-    "devDependencies": {
-        "hereby": "^1.10.0"
-    },
-    "dependencies": {
-        "fund": "^1.0.0"
-    }
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "hereby": "^1.10.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "fund": "^1.0.0"
+  },
+  "name": "waffle",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf dist/ && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sealam12/Waffle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sealam12/Waffle/issues"
+  },
+  "homepage": "https://github.com/sealam12/Waffle#readme",
+  "description": ""
 }
