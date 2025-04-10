@@ -11,7 +11,7 @@ export class Waffle {
         this.headers = headers;
     }
 
-    CombineHeaders(NewHeaders: Headers): Headers {
+    private CombineHeaders(NewHeaders: Headers): Headers {
         const NewH = new Headers(this.headers);
         NewHeaders.forEach((value, key) => {
             NewH.append(key, value);
@@ -38,8 +38,8 @@ export class Waffle {
         return new WaffleResponse(code, responseBody, statusText, contentType, response.headers);
     }
 
-    private async GenericPost(method: string, endpoint: string, body: object, headers: Headers): Promise<WaffleResponse> {
-        const response = await FetchWrapper.fetch(`${this.baseurl}${endpoint}`, "POST", headers, JSON.stringify(body));
+    private async GenericPost(method: string, endpoint: string, body: any, headers: Headers): Promise<WaffleResponse> {
+        const response = await FetchWrapper.fetch(`${this.baseurl}${endpoint}`, "POST", headers, body);
 
         const code = response.status;
         const statusText = response.statusText;
@@ -55,7 +55,7 @@ export class Waffle {
         return new WaffleResponse(code, responseBody, statusText, contentType, response.headers);
     }
 
-    async Post(endpoint: string, body: object, headers: Headers = new Headers()): Promise<WaffleResponse> {
+    async Post(endpoint: string, body: any, headers: Headers = new Headers()): Promise<WaffleResponse> {
         return this.GenericPost("POST", endpoint, body, headers);
     }
 }

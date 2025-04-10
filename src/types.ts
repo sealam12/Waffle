@@ -1,15 +1,15 @@
 export class WaffleResponse {
     code: number;
     body: any;
-    statusText: string;
-    contentType: string;
+    statustext: string;
+    contenttype: string;
     headers: Headers;
 
-    constructor(code: number, body: any, contentType: string, statusText: string, headers: Headers) {
+    constructor(code: number, body: any, contenttype: string, statustext: string, headers: Headers) {
         this.code = code;
         this.body = body;
-        this.statusText = statusText;
-        this.contentType = contentType;
+        this.statustext = statustext;
+        this.contenttype = contenttype;
         this.headers = headers;
     }
 

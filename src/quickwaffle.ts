@@ -20,8 +20,8 @@ class QuickWaffle {
         return new WaffleResponse(code, responseBody, statusText, contentType, response.headers);
     }
 
-    private async GenericPost(method: string, url: string, body: object, headers: Headers): Promise<WaffleResponse> {
-        const response = await FetchWrapper.fetch(url, method, headers, JSON.stringify(body));
+    private async GenericPost(method: string, url: string, body: any, headers: Headers): Promise<WaffleResponse> {
+        const response = await FetchWrapper.fetch(url, method, headers, body);
 
         const code = response.status;
         const statusText = response.statusText;
@@ -37,7 +37,7 @@ class QuickWaffle {
         return new WaffleResponse(code, responseBody, statusText, contentType, response.headers);
     }
 
-    async Post(endpoint: string, body: object, headers: Headers = new Headers()): Promise<WaffleResponse> {
+    async Post(endpoint: string, body: any, headers: Headers = new Headers()): Promise<WaffleResponse> {
         return this.GenericPost("POST", endpoint, body, headers);
     }
 }
