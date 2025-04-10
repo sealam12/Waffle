@@ -1,51 +1,101 @@
-# Waffle
-*Easily interact with external API's*
-## What is Waffle?
-Waffle is a javascript / typescript package to simplify the process of using the builtin fetch()  API. Waffle aims to make the process of contacting or interacting with third party or external API's easy.
+# 🧇 **Waffle**  
+**Simplify API interactions in JavaScript/TypeScript**  
+*A lightweight wrapper for the `fetch()` API with streamlined response handling.*
 
-## How does Waffle work?
-Waffle has two different ways of using the fetch() API:
-- **Waffle** - The standard method. You declare a class that has the base URL (eg. https://example.com/api), and you make calls to this API via class methods. (eg. ```MyWaffle.Get('/users')```)
-- **QuickWaffle** - A way to quickly contact the fetch() API, useful for when you are making one call to an external API, or multiple calls to seperate API's.
+---
 
-Each fetch method returns a WaffleResponse class, which makes it easier than ever to access response data. The body can be accessed simply by using ```Response.body``` or ```Response.json()```. WaffleResponses make it extremely easy to streamline the processing of data, without having to deal with the endless chain of ```.then(...).then(...).then(...)```
+## **Overview**
+### **What is Waffle?**
+Waffle is a JavaScript/TypeScript package that simplifies interactions with external APIs. It provides:
+- A clean syntax for reusable API clients (`Waffle` class).
+- One-off request utilities (`QuickWaffle`).
+- Consistent response handling with `WaffleResponse`.
 
-## Documentation
-#### **Waffle**
-The base class for interacting with an API.\
-```new Waffle(basurl: string, headers: Headers)```
+### **Key Features**
+- Eliminates promise chains with `async/await` syntax.
+- Built-in methods for common HTTP verbs (GET, POST, etc.).
+- Unified response format for easy data access.
 
-**Properties**\
-```baseurl: string``` - The base URL that all API endpoints extend from\
-```headers: Headers``` - The base headers that will be included in all API calls
+---
 
-**Methods**\
-```Get(endpoint: string, additionalheaders: Headers?)```: ```WaffleResponse```\
-```Post(endpoint: string, body: any, additionalheaders: Headers?)```: ```WaffleResponse```\
-```Update(endpoint: string, body: any, additionalheaders: Headers?)```: ```WaffleResponse```\
-```Create(endpoint: string, body: any, additionalheaders: Headers?)```: ```WaffleResponse```\
-```Delete(endpoint: string, body: any, additionalheaders: Headers?)```: ```WaffleResponse```
+## **Usage Guide**
 
-#### **QuickWaffle**
-A way to quickly contact an API or endpoint without creating a Waffle.
+### **1. The `Waffle` Class**  
+Create reusable API clients with a base URL and default headers.
 
-**Methods**\
-```[static] Get(URL: string, Headers: headers)```\
-```[static] Post(URL: string, body: any, headers: Headers)```\
-```[static] Update(URL: string, body: any, headers: Headers)```\
-```[static] Create(URL: string, body: any, headers: Headers)```\
-```[static] Delete(URL: string, body: any, headers: Headers)```
+#### **Constructor**
+```typescript
+new Waffle(baseUrl: string, headers?: Headers)
+```
+- `baseUrl`: Base endpoint for all requests (e.g., `https://api.example.com`).
+- `headers`: Default headers (optional).
 
-#### **WaffleResponse**
-The base class containing response information from API calls\
-```new WaffleResponse(ResponseCode: number, Body: any, ContentType: string, StatusText: string, Headers: Headers)```
+#### **Methods**
+```typescript
+Get(endpoint: string, additionalHeaders?: Headers): WaffleResponse
+Post(endpoint: string, body: any, additionalHeaders?: Headers): WaffleResponse
+Update(endpoint: string, body: any, additionalHeaders?: Headers): WaffleResponse
+Delete(endpoint: string, body: any, additionalHeaders?: Headers): WaffleResponse
+```
 
-**Properties**\
-```code: number``` - The response code the API call returned\
-```body: any``` - The body that was returned with the API call\
-```statustext: string``` - The status text returned by the API call\
-```contenttype: string``` - The ContentType header provided by the response\
-```headers: Headers``` - The headers returned by the API call
+**Example**  
+```typescript
+const api = new Waffle("https://api.example.com", new Headers({ Authorization: "TOKEN" }));
+const users = await api.Get("/users"); 
+console.log(users.json()); // Parsed JSON data
+```
 
-**Methods**\
-```json()``` - Returns the JSON/Object version of the ```body``` attribute.
+---
+
+### **2. `QuickWaffle`**  
+Make one-off requests without creating a client instance.
+
+#### **Static Methods**
+```typescript
+QuickWaffle.Get(url: string, headers?: Headers): WaffleResponse
+QuickWaffle.Post(url: string, body: any, headers?: Headers): WaffleResponse
+// ...and other HTTP methods
+```
+
+**Example**  
+```typescript
+const response = await QuickWaffle.Get(
+  "https://api.weather.com/forecast", 
+  new Headers({ "API-Key": "123" })
+);
+```
+
+---
+
+### **3. `WaffleResponse`**  
+Standardized response object with easy data access.
+
+#### **Properties**
+| Property       | Description                          |
+|----------------|--------------------------------------|
+| `code`         | HTTP status code (e.g., 200, 404)    |
+| `body`         | Raw response body                    |
+| `statusText`   | HTTP status text (e.g., "OK", "Not Found") |
+| `contentType`  | Response content type (e.g., "application/json") |
+| `headers`      | Response headers                     |
+
+#### **Methods**
+```typescript
+json(): any  // Parses `body` as JSON (throws error if not JSON)
+```
+
+**Example**  
+```typescript
+const response = await api.Get("/data");
+if (response.code === 200) {
+  const data = response.json(); // Access parsed data
+}
+```
+
+---
+
+## **Why Use Waffle?**
+- **No More `.then()` Chains**: Uses modern `async/await` syntax.
+- **DRY Code**: Reuse base configurations with the `Waffle` class.
+- **TypeScript Support**: Built with type safety in mind.
+- **Lightweight**: Minimal overhead over native `fetch()`.
