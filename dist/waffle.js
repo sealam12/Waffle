@@ -13,6 +13,8 @@ export class Waffle {
         });
         return NewH;
     }
+    AddHeader(name, value) { this.headers.append(name, value); }
+    ExtendHeaders(headers) { this.headers = this.CombineHeaders(headers); }
     async Get(endpoint, headers = new Headers()) {
         const combinedHeaders = this.CombineHeaders(headers);
         const response = await FetchWrapper.fetch(`${this.baseurl}${endpoint}`, "GET", combinedHeaders);
@@ -29,7 +31,7 @@ export class Waffle {
         return new WaffleResponse(code, responseBody, statusText, contentType, response.headers);
     }
     async GenericPost(method, endpoint, body, headers) {
-        const response = await FetchWrapper.fetch(`${this.baseurl}${endpoint}`, "POST", headers, JSON.stringify(body));
+        const response = await FetchWrapper.fetch(`${this.baseurl}${endpoint}`, "POST", headers, body);
         const code = response.status;
         const statusText = response.statusText;
         const contentType = Utils.GetContentType(response);

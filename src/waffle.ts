@@ -20,6 +20,9 @@ export class Waffle {
         return NewH;
     }
 
+    AddHeader(name: string, value: string) { this.headers.append(name, value) }
+    ExtendHeaders(headers: Headers) { this.headers = this.CombineHeaders(headers) }
+
     async Get(endpoint: string, headers: Headers = new Headers()): Promise<WaffleResponse> {
         const combinedHeaders = this.CombineHeaders(headers);
         const response = await FetchWrapper.fetch(`${this.baseurl}${endpoint}`, "GET", combinedHeaders);

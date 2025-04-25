@@ -1,5 +1,5 @@
 # 🧇 **Waffle**  
-**Simplify API interactions in JavaScript/TypeScript**  
+**Simplify API interactions in JavaScript/TypeScript**
 *A lightweight wrapper for the `fetch()` API with streamlined response handling.*
 
 ---

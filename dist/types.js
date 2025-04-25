@@ -1,9 +1,9 @@
 export class WaffleResponse {
-    constructor(code, body, contentType, statusText, headers) {
+    constructor(code, body, contenttype, statustext, headers) {
         this.code = code;
         this.body = body;
-        this.statusText = statusText;
-        this.contentType = contentType;
+        this.statustext = statustext;
+        this.contenttype = contenttype;
         this.headers = headers;
     }
     // You can add methods to parse the body if needed

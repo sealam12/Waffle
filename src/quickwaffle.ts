@@ -2,7 +2,7 @@ import { FetchWrapper } from "./http.js"
 import { WaffleResponse } from "./types.js";
 import { Utils } from "./utils.js";
 
-class QuickWaffle {
+export class QuickWaffle {
     static async Get(url: string, headers: Headers = new Headers()): Promise<WaffleResponse> {
         const response = await FetchWrapper.fetch(url, "GET", headers);
 
@@ -41,5 +41,3 @@ class QuickWaffle {
         return this.GenericPost("POST", endpoint, body, headers);
     }
 }
-
-export default QuickWaffle;

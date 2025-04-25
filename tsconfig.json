@@ -14,8 +14,8 @@
     "src/index.ts",
     "src/waffle.ts",
     "src/http.ts",
-    "src/quickwaffle.ts"
+    "src/quickwaffle.ts",
   ],
 
-  "include": ["src/**/*"],
+  "include": ["src/**/*"]
 }
