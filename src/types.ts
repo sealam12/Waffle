@@ -13,7 +13,6 @@ export class WaffleResponse {
         this.headers = headers;
     }
 
-    // You can add methods to parse the body if needed
     async json() {
         return this.body instanceof Object ? this.body : JSON.parse(this.body);
     }
@@ -22,7 +21,7 @@ export class WaffleResponse {
 export class InvalidResponseError extends Error {
     constructor(message: string) {
         super(message);
-        this.name = "InvalidResponseError"; // Set the error name
-        Object.setPrototypeOf(this, InvalidResponseError.prototype); // Restore prototype chain
+        this.name = "InvalidResponseError";
+        Object.setPrototypeOf(this, InvalidResponseError.prototype);
     }
 }
